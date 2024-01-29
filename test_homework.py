@@ -97,16 +97,15 @@ def test_readable_function():
     find_registration_button_on_login_page(page_url="https://companyname.com/login", button_text="Register")
 
 
-def func_print():
-    func_name = sys._getframe(1).f_code.co_name
-    get_attr = sys._getframe(1).f_locals
-    name = (' '.join(func_name.split('_'))).title()
+def func_print(func, *args, **kwargs):
+    func_name = (' '.join(func.__name__.split('_'))).title()
     list = []
-    for attr in get_attr.values():
-        list.append(attr)
+    for arg in args:
+        list.append(str(arg))
+    for value in kwargs.values():
+        list.append(str(value))
     attr = ', '.join(list)
-    print(name, attr)
-    return f'{name} [{attr}]'
+    return f'{func_name} [{attr}]'
 
 
 def open_browser(browser_name):
